@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir /dev/pts
+mount -a
+
+echo /sbin/mdev > /proc/sys/kernel/hotplug
+/sbin/mdev -s

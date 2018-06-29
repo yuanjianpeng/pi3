@@ -1,0 +1,13 @@
+the kernel linux-4.14 is checked out from raspberry pi kernel git respository
+
+$ git --work-tree=/work/pi/pi3_dev/linux-4.14/ checkout .
+
+the checkout HEAD point to:
+
+commit ec05b1a7860dbeee7d3fc3390c4d2ba8ddaeb8a9
+Merge: 82c4c8e d88700f
+Author: popcornmix <popcornmix@gmail.com>
+Date:   Mon May 21 15:43:53 2018 +0100
+
+    Merge remote-tracking branch 'stable/linux-4.14.y' into rpi-4.14.y
+
