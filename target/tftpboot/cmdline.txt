@@ -1,0 +1,1 @@
+dwc_otg.lpm_enable=0 console=serial0,115200 root=/dev/nfs nfsroot=192.168.2.20:/work/pi/pi3_dev/output/fs.root,nfsvers=3 nfsrootdebug ip=192.168.2.21:::255.255.255.0::eth0 rootwait elevator=deadline init=/linuxrc
