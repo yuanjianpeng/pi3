@@ -20,7 +20,7 @@ include $(USERSPACE_DIR)/Makefile
 PHONY += toolchain
 toolchain: install_toolchain ;
 
-############################# U-Boot #######################################################
+################### U-Boot #####################
 
 PHONY += uboot_prep uboot_defconfig uboot_menuconfig uboot_bakconfig \
 		uboot_modelconfig uboot_spl uboot uboot_merge_spl \
@@ -62,7 +62,7 @@ uboot_cscope:
 uboot_clean:
 	rm -fr $(UBOOT_BUILD_DIR)
 
-############################# Kernel #######################################################
+#################### Kernel ########################
 
 PHONY += kernel_prep kernel_defconfig kernel_menuconfig kernel_bakconfig \
 		kernel_modelconfig kernel kernel_cscope kernel_clean
@@ -109,10 +109,10 @@ kernel_cscope:
 kernel_clean:
 	rm -fr $(KERNEL_BUILD_DIR)
 
-############################# Out of tree Modules ##########################################
+############### Out of tree Modules #############
 
 
-############################# Userspace #######################################################
+################# Userspace ###############
 PHONY += userspace_prep userspace userspace_clean
 
 userspace_prep:
@@ -130,8 +130,8 @@ userspace_install_clean:
 
 userspace_install: $(PROGRAMS_INSTALL);
 
-############################# Rootfs #######################################################
-PHONY += rootfs_prep rootfs
+################ Rootfs ##################
+PHONY += rootfs
 
 glibc_libs := ld-* libc-* libc.* libm-* libm.*
 fs_libc_install:
@@ -160,5 +160,24 @@ rootfs:
 
 rootfs_clean:
 	rm -fr $(FS_ROOT_DIR)
+
+################ tftpboot ##################
+
+PHONY += tftpboot_prep tftpboot
+
+tftpboot_prep:
+	[ -d $(TFTP_BOOT_DIR) ] || mkdir -p $(TFTP_BOOT_DIR)
+
+$(TFTP_BOOT_DIR)/kernel8.img: $(KERNEL_BUILD_DIR)/arch/arm64/boot/Image
+	cp $< $@ 
+
+$(TFTP_BOOT_DIR)/rpi-3-b.dtb: $(TARGET_DIR)/rpi-3-b.dts
+	$(KERNEL_BUILD_DIR)/scripts/dtc/dtc -I dts -O dtb $< 2>/dev/null > $@
+
+tftpboot: tftpboot_prep $(TFTP_BOOT_DIR)/kernel8.img $(TFTP_BOOT_DIR)/rpi-3-b.dtb
+	@$(INSTALL_DIR) $(TARGET_DIR)/tftpboot/ $(TFTP_BOOT_DIR)/
+	 
+tftpboot_clean:
+	rm -fr $(TFTP_BOOT_DIR)
 
 .PHONY: $(PHONY)
