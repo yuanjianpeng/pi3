@@ -118,6 +118,11 @@
 			phandle = <0x1b>;
 		};
 
+		hy,led@0 {
+			compatible = "hy,gpio-led";
+			gpios = <&gpio 21 0x0>, <&gpio 26 0x0>;
+		};
+
 		onewire: onewire@0 {
 			compatible = "w1-gpio";
 			pinctrl-names = "default";
