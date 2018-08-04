@@ -173,7 +173,7 @@ $(TFTP_BOOT_DIR)/kernel8.img: $(KERNEL_BUILD_DIR)/arch/arm64/boot/Image
 	cp $< $@ 
 
 $(TFTP_BOOT_DIR)/rpi-3-b.dtb: $(TARGET_DIR)/rpi-3-b.dts
-	$(KERNEL_BUILD_DIR)/scripts/dtc/dtc -I dts -O dtb $< 2>/dev/null > $@
+	$(KERNEL_BUILD_DIR)/scripts/dtc/dtc -I dts -O dtb $< > $@
 
 tftpboot: tftpboot_prep $(TFTP_BOOT_DIR)/kernel8.img $(TFTP_BOOT_DIR)/rpi-3-b.dtb
 	@$(INSTALL_DIR) $(TARGET_DIR)/tftpboot/ $(TFTP_BOOT_DIR)/
