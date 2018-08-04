@@ -78,6 +78,7 @@ kernel_defconfig: kernel_prep
 
 kernel_menuconfig: kernel_prep
 	$(KERNEL_ENV) menuconfig
+	cp $(KERNEL_BUILD_DIR)/.config $(TARGET_DIR)/kernel.config
 
 kernel_bakconfig:
 	cp $(KERNEL_BUILD_DIR)/.config $(TARGET_DIR)/kernel.config
