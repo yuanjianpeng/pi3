@@ -134,7 +134,8 @@ userspace_install: $(PROGRAMS_INSTALL);
 ################ Rootfs ##################
 PHONY += rootfs
 
-glibc_libs := ld-* libc-* libc.* libm-* libm.*
+glibc_libs := ld-* libc-* libc.* libm-* libm.* libdl-* libdl.* \
+				libpthread-* libpthread.*
 fs_libc_install:
 	rm -fr $(FS_LIBC_DIR)
 	$(INSTALL) -d $(FS_LIBC_DIR)/lib
