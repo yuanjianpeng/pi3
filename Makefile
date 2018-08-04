@@ -123,8 +123,13 @@ userspace_prep:
 userspace: userspace_prep $(PROGRAMS)
 	@$(BUILDTIME) $@ 1
 
-userspace_clean:
+userspace_clean: userspace_build_clean userspace_dev_clean userspace_install_clean;
+
+userspace_build_clean:
 	rm -fr $(USERSPACE_BUILD_DIR)
+
+userspace_dev_clean:
+	rm -fr $(FS_DEV_DIR)
 
 userspace_install_clean:
 	rm -fr $(FS_INSTALL_DIR)

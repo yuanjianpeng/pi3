@@ -13,15 +13,20 @@ openssl_config_opt := linux-aarch64 \
 	--cross-compile-prefix=$(TOOLCHAIN_BIN_PREFIX) \
 	--prefix=$(openssl_install)
 
-openssl: 
+openssl_build:
 	[ -d $(openssl_output) ] || mkdir -p $(openssl_output)
 	cd $(openssl_output) && { [ -f Makefile ] || \
 		$(openssl_src)/Configure $(openssl_config_opt) ; }
 	cd $(openssl_output) && make -j$(JOBS)
-	
-openssl_install:
-	rm -fr $(openssl_install) $(openssl_dev)
+
+openssl: openssl_build openssl_dev_isntall;
+
+openssl_dev_isntall:
+	rm -fr $(openssl_dev)
 	cd $(openssl_output) && make INSTALLTOP=$(openssl_dev) install_dev
+
+openssl_install:
+	rm -fr $(openssl_install)
 	cd $(openssl_output) && make install_runtime
 
 openssl_clean:
