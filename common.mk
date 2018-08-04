@@ -57,6 +57,7 @@ FS_MODULES_DIR := $(OUTPUT_DIR)/fs.modules
 FS_ROOT_DIR := $(OUTPUT_DIR)/fs.root
 FS_COMMON_DIR := $(TARGET_DIR)/fs.common
 FS_LIBC_DIR := $(OUTPUT_DIR)/fs.libc
+FS_DEV_DIR := $(OUTPUT_DIR)/fs.dev
 
 TFTP_BOOT_DIR := $(OUTPUT_DIR)/tftpboot
 
